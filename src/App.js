@@ -7,7 +7,10 @@ const App = () => {
 
   const[pokemon, setPokemon] = useState("pikachu");
   const [pokemonData, setPokemonData] = useState([]);
-  const [pokemonType, setPokemonType] = useState("");
+  const [pokemonType1, setPokemonType1] = useState("");
+  const [pokemonType2, setPokemonType2] = useState("");
+  const [pokemonName, setPokemonName] = useState("");
+  const [pokemonImg, setPokemonImg] = useState("");
 
   const getPokemon = async () => {
     const toArray = [];
@@ -15,13 +18,20 @@ const App = () => {
       const url = `http://pokeapi.co/api/v2/pokemon/${pokemon}`
       const res = await axios.get(url);
       toArray.push(res.data)
-      setPokemonType(res.data.types[0].type.name)
+      setPokemonType1(capitalizeName(res.data.types[0].type.name))
+      setPokemonName(capitalizeName(res.data.species.name))
+      setPokemonImg(res.data.sprites.other.home.front_default)
       setPokemonData(toArray)
       console.log(res)
     }
     catch(e){
       console.log(e)
     }
+  }
+
+  const capitalizeName = (str) => {
+    const string = str.charAt(0).toUpperCase() + str.slice(1);
+    return string;
   }
 
   const handleChange = (e) =>{
@@ -43,12 +53,17 @@ const App = () => {
       {pokemonData.map((data) =>{
         return(
           <div className="container">
-            <img src={data.sprites["front_default"]} alt="" />
+            <img src={pokemonImg} alt="" />
             <div className="divTable">
               <div className="divTableBody">
               <div className="divTableRow">
+                <div className="divTableCell">Specie</div>
+                <div className="divTableCell">{pokemonName}</div>
+
+              </div>
+              <div className="divTableRow">
                 <div className="divTableCell">Type</div>
-                <div className="divTableCell">{pokemonType}</div>
+                <div className="divTableCell">{pokemonType1}</div>
 
               </div>
               <div className="divTableRow">
@@ -68,8 +83,8 @@ const App = () => {
 
               </div>
               <div className="divTableRow">
-                <div className="divTableCell">Number of Battles</div>
-                <div className="divTableCell">{data.game_indices.length}</div>
+                <div className="divTableCell">Ability</div>
+                <div className="divTableCell">{capitalizeName(data.abilities[0].ability.name)}</div>
 
               </div>
             </div></div>
