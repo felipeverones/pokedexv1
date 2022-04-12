@@ -8,7 +8,7 @@ const App = () => {
   const[pokemon, setPokemon] = useState("pikachu");
   const [pokemonData, setPokemonData] = useState([]);
   const [pokemonType1, setPokemonType1] = useState("");
-  const [pokemonType2, setPokemonType2] = useState("");
+  /* const [pokemonType2, setPokemonType2] = useState(""); */
   const [pokemonName, setPokemonName] = useState("");
   const [pokemonImg, setPokemonImg] = useState("");
 
