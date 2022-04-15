@@ -50,9 +50,9 @@ const App = () => {
           <input type="text" onChange={handleChange} placeholder="Enter pokémon name"/>
         </label>
       </form>
-      {pokemonData.map((data) =>{
+      {pokemonData.map((data, index) =>{
         return(
-          <div className="container">
+          <div key={index} className="container">
             <img src={pokemonImg} alt="" />
             <div className="divTable">
               <div className="divTableBody">
